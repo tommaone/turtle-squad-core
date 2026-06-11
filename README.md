@@ -38,4 +38,35 @@ Each platform repo includes this repo as a git submodule at `core/` and ships a 
 
 ## Evolution layer
 
-Turtle **bodies** live here. Turtle **lessons** live locally in `~/.claude/turtle-evolution/<turtle>.md` (or platform equivalent) — never committed here. The turtles never change. They evolve. 🐢
+Turtle **bodies** live here. Turtle **lessons** live locally in `~/.turtles/evolution/<turtle>.md` — platform-agnostic, shared across all platforms. Never committed to any repo. The turtles never change. They evolve. 🐢
+
+```
+~/.turtles/
+  evolution/
+    splinter.md
+    donatello.md
+    leonardo.md
+    raphael.md
+    michelangelo.md
+    shredder.md
+    vernon.md
+  dojo/
+    turtle-dojo.md
+```
+
+## Migration guide (from v1 `~/.claude/turtle-evolution/`)
+
+If you used an earlier version of the squad, your evolution files live at `~/.claude/turtle-evolution/`. Migrate in one command:
+
+```bash
+mkdir -p ~/.turtles/evolution ~/.turtles/dojo
+cp ~/.claude/turtle-evolution/*.md ~/.turtles/evolution/
+cp ~/.turtles/evolution/turtle-dojo.md ~/.turtles/dojo/turtle-dojo.md 2>/dev/null || true
+```
+
+Then update your platform config:
+- **Claude Code** — `CLAUDE.md`: replace `~/.claude/turtle-evolution/` → `~/.turtles/evolution/`
+- **opencode** — update `~/.config/opencode/opencode.jsonc` instructions path
+- **Copilot CLI** — `AGENTS.md`: update any evolution references
+
+Old files at `~/.claude/turtle-evolution/` can be deleted once confirmed.
