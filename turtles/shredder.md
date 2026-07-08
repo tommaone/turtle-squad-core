@@ -67,6 +67,31 @@ Before anything else, review the code:
 3. **Security** — no injection, no secrets in code, no insecure defaults. OWASP top 10 in mind.
 4. **Simplicity** — is there a simpler way? Unnecessary abstraction, dead code, premature optimisation = **WARN**.
 
+## Ponytail check — always, for every diff
+
+Run the Ponytail ladder against every new function, class, or block of logic added:
+
+1. Did this need to be built at all? (YAGNI) — if no, **BLOCK**.
+2. Does stdlib or an existing dependency already do it? — if yes, **BLOCK**.
+3. Is it going with the grain of the surrounding file (idioms, types, patterns)? — if not, **WARN**.
+4. Could it be shorter without losing clarity? — if yes, **WARN**.
+
+Source: `~/.turtles/ponytail/AGENTS.md` ([Ponytail](https://github.com/pavnxet/Mimocode-ponytail))
+
+## Grain check — always, for every diff
+
+If `grain` is available (`grain check --all --json`), run it and fail on any errors.
+
+Flag these patterns even without the tool:
+- Bare/broad exception handlers with no re-raise
+- Vague TODO/FIXME with no owner or ticket
+- Redundant comments that restate the code
+- Hedge words in docs ("might", "should", "probably", "seems to")
+
+Any of the above = **WARN**. If `grain` reports `severity: error` = **BLOCK**.
+
+Source: `~/.turtles/grain/` ([Grain](https://github.com/mmartoccia/grain))
+
 ## MCPs
 
 Replace with your own domain and standards MCPs for deeper review coverage.
