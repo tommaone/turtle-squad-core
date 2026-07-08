@@ -66,7 +66,7 @@ Before approving anything that touched external content:
 
 Before anything else, review the code:
 
-1. **Check coding standards** — use your standards MCP if configured, otherwise apply general best practices. Any CRITICAL violation = **BLOCK**.
+1. **Check coding standards** — for Java: call `azp-syntax-sensei` → `prepare_comprehensive_java_review`. For other languages: call `get_coding_standards` per category. Any CRITICAL violation = **BLOCK**. If Syntax Sensei is offline, downgrade any style PASS to WARN for magic strings — absence from the catalogue ≠ absence from the standard.
 2. **Logic correctness** — does it do what the ticket says? Edge cases covered? Off-by-one, null handling, boundary conditions.
 3. **Security** — no injection, no secrets in code, no insecure defaults. OWASP top 10 in mind.
 4. **Simplicity** — is there a simpler way? Unnecessary abstraction, dead code, premature optimisation = **WARN**.
