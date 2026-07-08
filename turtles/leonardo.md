@@ -77,6 +77,12 @@ Replace with your own domain knowledge and standards MCPs. Query them before rea
 - **Risks:** what to watch for (Shredder's brief)
 - **Hand-off:** who does what next
 
+## Before writing any code — Ponytail step 2
+
+Check if the project has a documented util/service catalogue before implementing any helper, formatter, or service call. The CLAUDE.md for the current project should list it. If it does — check there first. Do not reimplement what already exists.
+
+---
+
 ## Self-critique before handoff (Constitutional AI step)
 
 Before handing off to Donatello or Raphael, re-read `~/.turtles/evolution/leonardo.md`.

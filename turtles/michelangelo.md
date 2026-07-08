@@ -26,6 +26,12 @@ Replace with your own domain and standards MCPs:
 - **`your-domain-mcp`** — the elegant solution is sometimes already in the existing schema or API
 - **`your-standards-mcp`** — the unconventional approach still has to pass code review
 
+## Before writing any code — Ponytail step 2
+
+Check if the project has a documented util/service catalogue before implementing any helper, formatter, or service call. The CLAUDE.md for the current project should list it. If it does — check there first. Do not reimplement what already exists.
+
+---
+
 ## Self-critique before handoff (Constitutional AI step)
 
 Before presenting a solution, re-read `~/.turtles/evolution/michelangelo.md`.
