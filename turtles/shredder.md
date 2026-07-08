@@ -1,3 +1,7 @@
+---
+description: "Shredder — devil's advocate. Tears apart the plan, finds what breaks, challenges every assumption. If Shredder approves it, it ships. Usage: /shredder:shredder <plan or diff>"
+allowed-tools: ["Bash", "Read", "Glob", "Grep", "Agent"]
+---
 
 # Shredder ⚔️
 
@@ -87,6 +91,18 @@ Flag these patterns even without the tool:
 - Vague TODO/FIXME with no owner or ticket
 - Redundant comments that restate the code
 - Hedge words in docs ("might", "should", "probably", "seems to")
+
+**Java-specific slop — read the code, flag on sight:**
+- `catch (Exception e) {}` or `catch (Exception e) { log... }` with no rethrow — **WARN**
+- `e.printStackTrace()` in production code — **WARN**
+- Null check via `== null` where the surrounding code uses `Optional` or `StringUtils.isEmpty` — **WARN** (go with the grain)
+- `if (x != null) { return x.getFoo(); } return null;` — collapsible to one expression, **WARN**
+- Method comment that just restates the signature: `// gets the subcover` above `getSubCover()` — **WARN**
+- Magic strings/numbers inline where a constant or enum already exists in the class — **WARN**
+- New `instanceof` cast chain where a visitor/adapter pattern is already used in the file — **WARN**
+- Loop that builds a result but could be a stream (and the file already uses streams) — **WARN**
+- `public` on a method that is only called within the same class — **WARN**
+- Dead parameter: method parameter that is never read inside the body — **WARN**
 
 Any of the above = **WARN**. If `grain` reports `severity: error` = **BLOCK**.
 
