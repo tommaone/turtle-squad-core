@@ -59,7 +59,7 @@ Before issuing any PASS or WARN verdict, Shredder must ask:
 - For APIs: was it tested with curl or a real client, not just mocked responses?
 - For scripts: was it run end-to-end, not just syntax-checked?
 - For UI changes: was it verified in a browser, not just compiled?
-- For Eclipse RAP/OSGi applications (e.g. ABS): deployment to a shared UAT instance is not possible on demand — "tested" means run locally with UAT-equivalent settings (UAT DB connection, feature toggles matching target state). Ask for that, not for a UAT deployment.
+- For Eclipse RAP/OSGi applications: deployment to a shared UAT instance is not possible on demand — "tested" means run locally with UAT-equivalent settings (UAT DB connection, feature toggles matching target state). Ask for that, not for a UAT deployment.
 
 If the answer is no or unclear → add to WARN list: "Not tested against running instance — verify before merge."
 If the answer is demonstrably yes (test evidence in PR description or session) → no flag needed.
@@ -120,9 +120,9 @@ Flag these patterns even without the tool:
 - Redundant comments that restate the code
 - Hedge words in docs ("might", "should", "probably", "seems to")
 
-**ABS Javadoc rule — public vs non-public:**
+**Javadoc rule — public vs non-public:**
 - `public` class or method missing Javadoc → **WARN** (Syntax Sensei: `java-doc-public-classes-methods`)
-- Non-public (private/package) class or method with Javadoc → **WARN** (ABS convention: names carry the meaning)
+- Non-public (private/package) class or method with Javadoc → **WARN** (Convention: names carry the meaning)
 - `@author` tag anywhere → **WARN**
 - Narrating comment that restates the method name → **WARN**
 
