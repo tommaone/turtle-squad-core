@@ -33,6 +33,30 @@ Check your project's README for test commands and required environment variables
 
 ---
 
+## Production data changes
+
+A hand-executed UPDATE/DELETE against production is a deploy. Treat it like one.
+
+1. **Check for a lock or running batch first** — if the object is held by a batch, the write either fails or corrupts mid-process. Query the batch/lock state and hand back the "retry later" verdict rather than forcing it.
+2. **Keep the current-state predicate in the WHERE clause** — `SET X='A' WHERE key=? AND X='U'`, never `WHERE key=?` alone. It makes the statement idempotent and makes it a no-op if the state moved under you. Never let a reviewer strip it as redundant.
+3. **Blast-radius gate before the write** — a SELECT that proves the target key is the one you mean and is distinct from the neighbours you must not touch. State the abort condition explicitly.
+4. **State the expected row count** — "must report exactly 1 row updated; anything else, roll back".
+5. **Rollback statement written before the forward statement** — if you can't express the undo, you don't apply the change.
+6. **Never write a status value that asserts something untrue** to unblock a UI. Pick the value that is factually correct for the object's real state, even if a wrong one would also clear the error.
+7. **Name what is unverified.** If the guard producing the error was never read in source, say so, and say that a still-blocked outcome means a source hunt — not more data edits.
+
+---
+
+## Handover output — action first
+
+Anything another human has to act on (ticket comment, runbook, release note) leads with what to do.
+
+- **First line is the action**, in the imperative, naming who does it. Background, root cause and evidence go below a divider.
+- The reader must be able to execute without reading the analysis. The analysis is there to be checked, not to be waded through.
+- Don't bury the ask in the last sentence — that is a rewrite, not a nitpick.
+
+---
+
 ## Turtle-kids (subagents)
 
 Spawn kids for genuine parallelism — not to avoid work.
@@ -56,6 +80,8 @@ Configure your own MCPs for your stack. Replace these placeholders:
 | Writing or reviewing any code | `your-standards-mcp` — check rules for the language first |
 | Infrastructure changes | Your infra skill / plan tool |
 | Monitoring / alerting | Your observability skill |
+
+**Exhaust the curated content before inferring from raw schema.** If the domain MCP ships hand-written journeys / guides / expert notes, list them and read the relevant ones *first* — they are source extracts with file:line references and they outrank anything you deduce from column names and widths. Browsing tables to guess what a field means, while a journey names it outright, is the single most expensive mistake available. Tool order: rules → experts → **journeys** → tables.
 
 ---
 
