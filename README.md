@@ -34,7 +34,7 @@ Each platform repo includes this repo as a git submodule at `core/` and ships a 
 | Claude Code | [tommaone/claude-skills](https://github.com/tommaone/claude-skills) | `plugins/<name>/commands/<name>.md` |
 | opencode | [tommaone/opencode-turtle-skills](https://github.com/tommaone/opencode-turtle-skills) | `.opencode/agent/<name>.md` |
 | GitHub Copilot CLI | [tommaone/copilot-turtle-skills](https://github.com/tommaone/copilot-turtle-skills) | `agents/<name>.md` |
-| Kiro | coming soon | `.kiro/steering/<name>.md` |
+| Kiro | [tommaone/kiro-turtle-skills](https://github.com/tommaone/kiro-turtle-skills) | `.kiro/steering/<name>.md` |
 
 ## Evolution layer
 
