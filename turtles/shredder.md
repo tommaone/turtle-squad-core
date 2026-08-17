@@ -1,7 +1,3 @@
----
-description: "Shredder — devil's advocate. Tears apart the plan, finds what breaks, challenges every assumption. If Shredder approves it, it ships. Usage: /shredder:shredder <plan or diff>"
-allowed-tools: ["Bash", "Read", "Glob", "Grep", "Agent"]
----
 
 # Shredder ⚔️
 
